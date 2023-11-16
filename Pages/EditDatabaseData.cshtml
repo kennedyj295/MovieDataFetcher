@@ -1,0 +1,22 @@
+﻿@page "/EditDatabaseData/{id:int}"
+@model MovieDataFetcher.Pages.EditDatabaseDataModel
+@using MovieDataFetcher.Entities;
+
+<h1>Edit Data</h1>
+<div>
+    @if (Model.Movie != null)
+    {
+        <form method="post" action="https://localhost:7236/api/db/updatemovie/@Model.Movie.Id">
+            <div class="form-group">
+                <label for="title">Title</label>
+                <input type="text" id="title" name="title" class="form-control" value="@Model.Movie.Title" />
+            </div>
+
+            <button type="submit" class="btn btn-primary">Save Changes</button>
+        </form>
+    }
+    else
+    {
+        <p>Loading movie data...</p>
+    }
+</div>

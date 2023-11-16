@@ -1,0 +1,12 @@
+﻿@page
+@model MovieDataFetcher.Pages.IndexModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@{
+    <h1>Main Page</h1>
+    <ul>
+        <li><a asp-page="/DisplayDatabaseResults">Display Database Results</a></li>
+        <!-- passes a default ID of 872585 in the below url -->
+        <li><a asp-page="/EditDatabaseData" asp-route-id="872585">Edit Database Data</a></li>
+    </ul>
+}

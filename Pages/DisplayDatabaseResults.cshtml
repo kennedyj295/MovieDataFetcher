@@ -1,0 +1,30 @@
+﻿@page
+@model MovieDataFetcher.Pages.DisplayDatabaseResultsModel
+
+@{
+    <h1>Database Results</h1>
+    <div>
+        @if (Model.movies != null && Model.movies.Count > 0)
+        {
+            <table>
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.movies.Take(10))
+                    {
+                        <tr>
+                            <td>@item.Title</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <p>No data available.</p>
+        }
+    </div>
+}
