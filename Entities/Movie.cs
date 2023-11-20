@@ -34,10 +34,6 @@ namespace MovieDataFetcher.Entities
         [JsonConverter(typeof(DateTimeConverter))]
         public DateTime ReleaseDate { get; set; }
 
-        [Column("Title")]
-        [JsonPropertyName("title")]
-        public string? Title { get; set; }
-
         [Column("VoteAverage")]
         [JsonPropertyName("vote_average")]
         public double VoteAverage { get; set; }

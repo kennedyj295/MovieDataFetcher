@@ -4,12 +4,12 @@
 
 <h1>Edit Data</h1>
 <div>
-    @if (Model.Movie != null)
+    @if (Model.movie != null)
     {
-        <form method="post" action="https://localhost:7236/api/db/updatemovie/@Model.Movie.Id">
+        <form method="post" action="https://localhost:7236/api/db/updatemovie/@Model.movie.Id">
             <div class="form-group">
                 <label for="title">Title</label>
-                <input type="text" id="title" name="title" class="form-control" value="@Model.Movie.Title" />
+                <input type="text" id="title" name="OriginalTitle" class="form-control" value="@Model.movie.OriginalTitle" />
             </div>
 
             <button type="submit" class="btn btn-primary">Save Changes</button>

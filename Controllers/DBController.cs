@@ -40,7 +40,7 @@ namespace MovieDataFetcher.Controllers
                         var movie = new Movie
                         {
                             Id = reader.GetInt32(reader.GetOrdinal("Id")),
-                            Title = reader.GetString(reader.GetOrdinal("OriginalTitle")),
+                            OriginalTitle = reader.GetString(reader.GetOrdinal("OriginalTitle")),
                         };
 
                         movies.Add(movie);
@@ -69,7 +69,7 @@ namespace MovieDataFetcher.Controllers
                         if (await reader.ReadAsync())
                         {
                             movie.Id = reader.GetInt32(reader.GetOrdinal("Id"));
-                            movie.Title = reader.GetString(reader.GetOrdinal("OriginalTitle"));
+                            movie.OriginalTitle = reader.GetString(reader.GetOrdinal("OriginalTitle"));
                         }
                         else
                         {
@@ -93,7 +93,7 @@ namespace MovieDataFetcher.Controllers
                 using (var command = new NpgsqlCommand("UPDATE Movies SET OriginalTitle = @OriginalTitle WHERE Id = @Id", connection))
                 {
                     command.Parameters.Add("@Id", NpgsqlTypes.NpgsqlDbType.Integer).Value = id;
-                    command.Parameters.Add("@OriginalTitle", NpgsqlTypes.NpgsqlDbType.Text).Value = movie.Title;
+                    command.Parameters.Add("@OriginalTitle", NpgsqlTypes.NpgsqlDbType.Text).Value = movie.OriginalTitle;
 
                     int rowsAffected = await command.ExecuteNonQueryAsync();
 
@@ -114,9 +114,10 @@ namespace MovieDataFetcher.Controllers
             {
                 await connection.OpenAsync();
 
-                using (var command = new NpgsqlCommand("INSERT INTO Movies (OriginalTitle) VALUES (@Title) RETURNING Id", connection))
+                using (var command = new NpgsqlCommand("INSERT INTO Movies (Id, OriginalTitle) VALUES (@Id, @OriginalTitle) RETURNING Id", connection))
                 {
-                    command.Parameters.Add("@OriginalTitle", NpgsqlTypes.NpgsqlDbType.Text).Value = movie.Title;
+                    command.Parameters.Add("@Id", NpgsqlTypes.NpgsqlDbType.Integer).Value = movie.Id;
+                    command.Parameters.Add("@OriginalTitle", NpgsqlTypes.NpgsqlDbType.Text).Value = movie.OriginalTitle;
 
                     int newId = Convert.ToInt32(await command.ExecuteScalarAsync());
 

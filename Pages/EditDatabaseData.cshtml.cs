@@ -17,7 +17,7 @@ namespace MovieDataFetcher.Pages
         }
 
         [BindProperty]
-        public Movie Movie { get; set; }
+        public Movie movie { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int id)
         {
@@ -27,7 +27,7 @@ namespace MovieDataFetcher.Pages
             if (response.IsSuccessStatusCode)
             {
                 var jsonContent = await response.Content.ReadAsStringAsync();
-                Movie = JsonSerializer.Deserialize<Movie>(jsonContent);
+                movie = JsonSerializer.Deserialize<Movie>(jsonContent);
             }
             else
             {
